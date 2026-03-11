@@ -1,0 +1,24 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# Secrets - NEVER commit
+.env
+
+# Temp/scratch files
+scripts/*.bak
+scripts/write_patch.py
+scripts/_new_block.py
+scripts/__pycache__/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
