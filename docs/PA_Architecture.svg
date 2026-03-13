@@ -1,0 +1,394 @@
+<svg viewBox="0 0 1100 1320" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+
+  <!-- Background -->
+  <rect width="1100" height="1320" fill="#F8FAFC"/>
+
+  <!-- ══════════════════════════════════════════════════
+       TITLE BLOCK
+  ══════════════════════════════════════════════════ -->
+  <rect x="0" y="0" width="1100" height="72" fill="#1F5C99"/>
+  <text x="36" y="28" font-size="18" font-weight="700" fill="#FFFFFF">ADK Prior Authorization Agent</text>
+  <text x="36" y="52" font-size="13" fill="#B3D4F0">Da Vinci CRD + DTR + PAS  |  Google ADK + Gemini 2.5 Flash  |  FHIR R4  |  GCP Healthcare API</text>
+  <text x="1064" y="44" font-size="11" fill="#7AAFD4" text-anchor="end">github.com/gbhorne</text>
+
+  <!-- ══════════════════════════════════════════════════
+       LEGEND
+  ══════════════════════════════════════════════════ -->
+  <rect x="36" y="86" width="1028" height="38" rx="4" fill="#EEF4FA" stroke="#C5D9EE" stroke-width="1"/>
+  <!-- legend items -->
+  <rect x="52" y="98" width="14" height="14" rx="2" fill="#1F5C99"/>
+  <text x="72" y="110" font-size="11" fill="#333">ADK Agent / LLM</text>
+  <rect x="188" y="98" width="14" height="14" rx="2" fill="#2D9E6B"/>
+  <text x="208" y="110" font-size="11" fill="#333">FHIR / Healthcare API</text>
+  <rect x="360" y="98" width="14" height="14" rx="2" fill="#7B5EA7"/>
+  <text x="380" y="110" font-size="11" fill="#333">GCP Services</text>
+  <rect x="480" y="98" width="14" height="14" rx="2" fill="#C05C1A"/>
+  <text x="500" y="110" font-size="11" fill="#333">Payer (External)</text>
+  <rect x="608" y="98" width="14" height="14" rx="2" fill="#888" stroke="#888"/>
+  <line x1="615" y1="105" x2="635" y2="105" stroke="#888" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="648" y="110" font-size="11" fill="#333">Async / Polling path</text>
+  <line x1="780" y1="105" x2="808" y2="105" stroke="#1F5C99" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <text x="816" y="110" font-size="11" fill="#333">Data flow</text>
+
+  <!-- ══════════════════════════════════════════════════
+       DEFS: markers, patterns
+  ══════════════════════════════════════════════════ -->
+  <defs>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#1F5C99"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#2D9E6B"/>
+    </marker>
+    <marker id="arrowGray" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#888"/>
+    </marker>
+    <marker id="arrowOrange" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#C05C1A"/>
+    </marker>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#00000018"/>
+    </filter>
+  </defs>
+
+  <!-- ══════════════════════════════════════════════════
+       TRIGGER / INBOUND
+  ══════════════════════════════════════════════════ -->
+  <rect x="36" y="144" width="200" height="56" rx="8" fill="#7B5EA7" filter="url(#shadow)"/>
+  <text x="136" y="166" font-size="12" font-weight="700" fill="white" text-anchor="middle">Cloud Pub/Sub</text>
+  <text x="136" y="183" font-size="11" fill="#E8DAFF" text-anchor="middle">orchestrator-ready topic</text>
+  <text x="136" y="197" font-size="10" fill="#D0BCFF" text-anchor="middle">Upstream CDSS pipeline trigger</text>
+
+  <!-- arrow: Pub/Sub -> ADK Agent -->
+  <line x1="236" y1="172" x2="296" y2="172" stroke="#1F5C99" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <text x="264" y="168" font-size="9" fill="#555" text-anchor="middle">patient_id</text>
+  <text x="264" y="180" font-size="9" fill="#555" text-anchor="middle">cpt_code</text>
+
+  <!-- ══════════════════════════════════════════════════
+       ADK AGENT CONTAINER
+  ══════════════════════════════════════════════════ -->
+  <rect x="296" y="130" width="568" height="456" rx="10" fill="#EEF4FA" stroke="#2E75B6" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="296" y="130" width="568" height="32" rx="10" fill="#1F5C99"/>
+  <!-- square off bottom corners of header -->
+  <rect x="296" y="148" width="568" height="14" fill="#1F5C99"/>
+  <text x="580" y="152" font-size="13" font-weight="700" fill="white" text-anchor="middle">ADK prior_authorization_agent  (Gemini 2.5 Flash)</text>
+
+  <!-- Gemini LLM orchestrator box -->
+  <rect x="316" y="174" width="528" height="44" rx="6" fill="#1F5C99" opacity="0.12" stroke="#1F5C99" stroke-width="1" stroke-dasharray="4,2"/>
+  <text x="580" y="192" font-size="11" font-weight="700" fill="#1F5C99" text-anchor="middle">Gemini 2.5 Flash Orchestrator</text>
+  <text x="580" y="208" font-size="10" fill="#2E75B6" text-anchor="middle">Reads context, selects next tool, passes outputs forward -- 5 call_llm cycles per run</text>
+
+  <!-- ─── PA-1 ─── -->
+  <rect x="316" y="232" width="528" height="54" rx="6" fill="white" stroke="#2E75B6" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="316" y="232" width="8" height="54" rx="3" fill="#2E75B6"/>
+  <text x="338" y="252" font-size="11" font-weight="700" fill="#1F5C99">PA-1  pa_1_check_coverage</text>
+  <text x="338" y="267" font-size="10" fill="#444">Da Vinci CRD  |  CDS Hooks order-sign hook  |  Reads Coverage from FHIR, POSTs to payer CRD endpoint</text>
+  <text x="338" y="280" font-size="10" fill="#444">Returns: status (PA_REQUIRED / PA_NOT_REQUIRED / UNKNOWN), coverage_fhir_id, payer_id</text>
+
+  <!-- ─── PA-2 ─── -->
+  <rect x="316" y="298" width="528" height="54" rx="6" fill="white" stroke="#2E75B6" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="316" y="298" width="8" height="54" rx="3" fill="#2E75B6"/>
+  <text x="338" y="318" font-size="11" font-weight="700" fill="#1F5C99">PA-2  pa_2_fetch_questionnaire</text>
+  <text x="338" y="333" font-size="10" fill="#444">Da Vinci DTR  |  Firestore cache (24h TTL) -> payer DTR endpoint -> local template fallback</text>
+  <text x="338" y="346" font-size="10" fill="#444">Returns: questionnaire_id, item_count, items list, _source indicator</text>
+
+  <!-- ─── PA-3 ─── -->
+  <rect x="316" y="364" width="528" height="54" rx="6" fill="white" stroke="#2E75B6" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="316" y="364" width="8" height="54" rx="3" fill="#1F5C99"/>
+  <text x="338" y="384" font-size="11" font-weight="700" fill="#1F5C99">PA-3  pa_3_fill_questionnaire  (core AI step)</text>
+  <text x="338" y="399" font-size="10" fill="#444">Gemini fills questionnaire using FHIR $everything  |  Citation validator checks all cited resource IDs</text>
+  <text x="338" y="412" font-size="10" fill="#444">Hallucinated IDs downgraded to LOW confidence  |  MISSING required answers block submission</text>
+
+  <!-- ─── PA-4 ─── -->
+  <rect x="316" y="430" width="528" height="54" rx="6" fill="white" stroke="#2E75B6" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="316" y="430" width="8" height="54" rx="3" fill="#2E75B6"/>
+  <text x="338" y="450" font-size="11" font-weight="700" fill="#1F5C99">PA-4  pa_4_assemble_bundle</text>
+  <text x="338" y="465" font-size="10" fill="#444">Builds Da Vinci PAS FHIR transaction bundle (PAS IG v2.1.0 entry order enforced)</text>
+  <text x="338" y="478" font-size="10" fill="#444">Cloud DLP inspection -- HIGH likelihood PHI blocks assembly  |  WARN-only for expected PHI</text>
+
+  <!-- ─── PA-5 ─── -->
+  <rect x="316" y="496" width="528" height="54" rx="6" fill="white" stroke="#2E75B6" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="316" y="496" width="8" height="54" rx="3" fill="#2E75B6"/>
+  <text x="338" y="516" font-size="11" font-weight="700" fill="#1F5C99">PA-5  pa_5_submit_bundle</text>
+  <text x="338" y="531" font-size="10" fill="#444">POSTs PAS bundle to payer $submit  |  Parses ClaimResponse  |  Writes to FHIR (status=draft)</text>
+  <text x="338" y="544" font-size="10" fill="#444">Publishes decision to Pub/Sub  |  Stores submission state in Firestore for async polling</text>
+
+  <!-- vertical flow arrows inside agent -->
+  <line x1="580" y1="218" x2="580" y2="232" stroke="#1F5C99" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+  <line x1="580" y1="286" x2="580" y2="298" stroke="#1F5C99" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+  <line x1="580" y1="352" x2="580" y2="364" stroke="#1F5C99" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+  <line x1="580" y1="418" x2="580" y2="430" stroke="#1F5C99" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+  <line x1="580" y1="484" x2="580" y2="496" stroke="#1F5C99" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+
+  <!-- ══════════════════════════════════════════════════
+       EARLY EXIT PATHS
+  ══════════════════════════════════════════════════ -->
+  <!-- Not Required exit from PA-1 -->
+  <path d="M316,259 L276,259 L276,308" stroke="#888" stroke-width="1.5" stroke-dasharray="4,2" fill="none" marker-end="url(#arrowGray)"/>
+  <text x="268" y="254" font-size="9" fill="#888" text-anchor="end">NOT_REQUIRED</text>
+  <text x="268" y="265" font-size="9" fill="#888" text-anchor="end">exit + publish</text>
+
+  <!-- MISSING required exit from PA-3 -->
+  <path d="M316,391 L280,391 L280,438" stroke="#888" stroke-width="1.5" stroke-dasharray="4,2" fill="none" marker-end="url(#arrowGray)"/>
+  <text x="272" y="386" font-size="9" fill="#888" text-anchor="end">MISSING</text>
+  <text x="272" y="397" font-size="9" fill="#888" text-anchor="end">required</text>
+
+  <!-- DLP block exit from PA-4 -->
+  <path d="M316,457 L280,457 L280,516" stroke="#C05C1A" stroke-width="1.5" stroke-dasharray="4,2" fill="none" marker-end="url(#arrowOrange)"/>
+  <text x="272" y="452" font-size="9" fill="#C05C1A" text-anchor="end">DLP block</text>
+
+  <!-- ══════════════════════════════════════════════════
+       FHIR / HEALTHCARE API  (right side, tall box)
+  ══════════════════════════════════════════════════ -->
+  <rect x="896" y="144" width="168" height="430" rx="8" fill="#E8F7EF" stroke="#2D9E6B" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="896" y="144" width="168" height="28" rx="8" fill="#2D9E6B"/>
+  <rect x="896" y="158" width="168" height="14" fill="#2D9E6B"/>
+  <text x="980" y="162" font-size="12" font-weight="700" fill="white" text-anchor="middle">FHIR R4 Store</text>
+  <text x="980" y="178" font-size="10" fill="#1A7A51" text-anchor="middle">Healthcare API</text>
+  <text x="980" y="192" font-size="10" fill="#1A7A51" text-anchor="middle">cdss-fhir-store</text>
+
+  <!-- FHIR resources listed -->
+  <text x="910" y="215" font-size="10" fill="#1A7A51" font-weight="700">Resources Read</text>
+  <text x="910" y="230" font-size="10" fill="#333">Patient</text>
+  <text x="910" y="244" font-size="10" fill="#333">Coverage</text>
+  <text x="910" y="258" font-size="10" fill="#333">Condition (x3)</text>
+  <text x="910" y="272" font-size="10" fill="#333">Observation</text>
+  <text x="910" y="286" font-size="10" fill="#333">MedicationRequest (x2)</text>
+  <text x="910" y="300" font-size="10" fill="#333">ClinicalImpression</text>
+  <text x="910" y="314" font-size="10" fill="#333">DiagnosticReport</text>
+  <text x="910" y="328" font-size="10" fill="#333">Encounter</text>
+  <text x="910" y="342" font-size="10" fill="#333">Practitioner</text>
+  <text x="910" y="356" font-size="10" fill="#333">CarePlan</text>
+  <line x1="910" y1="365" x2="1050" y2="365" stroke="#C5E8D5" stroke-width="1"/>
+  <text x="910" y="382" font-size="10" fill="#1A7A51" font-weight="700">Resources Written</text>
+  <text x="910" y="398" font-size="10" fill="#333">ClaimResponse (draft)</text>
+  <text x="910" y="412" font-size="10" fill="#333">Task (on error/denied/</text>
+  <text x="910" y="426" font-size="10" fill="#333">  pended/window exceeded)</text>
+  <line x1="910" y1="436" x2="1050" y2="436" stroke="#C5E8D5" stroke-width="1"/>
+  <text x="910" y="452" font-size="10" fill="#1A7A51" font-weight="700">Patient: James Thornton</text>
+  <text x="910" y="467" font-size="10" fill="#555">T2DM | HTN | CKD3</text>
+  <text x="910" y="481" font-size="10" fill="#555">Payer: bcbs-ca-001</text>
+  <text x="910" y="495" font-size="10" fill="#555">CPT: 95251 (CGM)</text>
+  <text x="910" y="510" font-size="10" fill="#555">19 FHIR resources loaded</text>
+  <text x="910" y="524" font-size="10" fill="#555">Result: APPROVED</text>
+  <text x="910" y="538" font-size="10" fill="#555">Runtime: ~81 seconds</text>
+  <text x="910" y="556" font-size="10" fill="#888">HumanReviewGate:</text>
+  <text x="910" y="569" font-size="10" fill="#888">ClaimResponse stays</text>
+
+  <!-- arrows: PA-1 reads FHIR -->
+  <line x1="844" y1="259" x2="896" y2="259" stroke="#2D9E6B" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+  <text x="870" y="254" font-size="9" fill="#2D9E6B" text-anchor="middle">read Coverage</text>
+
+  <!-- arrows: PA-3 reads FHIR $everything -->
+  <line x1="844" y1="391" x2="896" y2="391" stroke="#2D9E6B" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+  <text x="870" y="385" font-size="9" fill="#2D9E6B" text-anchor="middle">$everything</text>
+
+  <!-- arrow: PA-5 writes ClaimResponse -->
+  <line x1="844" y1="523" x2="896" y2="405" stroke="#2D9E6B" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+  <text x="876" y="476" font-size="9" fill="#2D9E6B" text-anchor="end">write ClaimResponse</text>
+
+  <!-- ══════════════════════════════════════════════════
+       PAYER (External) box  
+  ══════════════════════════════════════════════════ -->
+  <rect x="36" y="620" width="828" height="120" rx="8" fill="#FEF0E7" stroke="#C05C1A" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="36" y="620" width="828" height="28" rx="8" fill="#C05C1A"/>
+  <rect x="36" y="634" width="828" height="14" fill="#C05C1A"/>
+  <text x="450" y="643" font-size="12" font-weight="700" fill="white" text-anchor="middle">Payer (External)  --  BCBS California (bcbs-ca-001)  --  Da Vinci FHIR Endpoints</text>
+
+  <!-- Three payer endpoints -->
+  <rect x="56" y="658" width="236" height="68" rx="6" fill="white" stroke="#C05C1A" stroke-width="1"/>
+  <text x="174" y="676" font-size="11" font-weight="700" fill="#C05C1A" text-anchor="middle">CRD Endpoint</text>
+  <text x="174" y="691" font-size="10" fill="#333" text-anchor="middle">CDS Hooks order-sign hook</text>
+  <text x="174" y="705" font-size="10" fill="#333" text-anchor="middle">POST /crd</text>
+  <text x="174" y="719" font-size="10" fill="#555" text-anchor="middle">Returns CDS Hook Cards</text>
+
+  <rect x="312" y="658" width="236" height="68" rx="6" fill="white" stroke="#C05C1A" stroke-width="1"/>
+  <text x="430" y="676" font-size="11" font-weight="700" fill="#C05C1A" text-anchor="middle">DTR Endpoint</text>
+  <text x="430" y="691" font-size="10" fill="#333" text-anchor="middle">FHIR Questionnaire resource</text>
+  <text x="430" y="705" font-size="10" fill="#333" text-anchor="middle">GET /fhir/Questionnaire</text>
+  <text x="430" y="719" font-size="10" fill="#555" text-anchor="middle">?context-of-use={cpt_code}</text>
+
+  <rect x="568" y="658" width="276" height="68" rx="6" fill="white" stroke="#C05C1A" stroke-width="1"/>
+  <text x="706" y="676" font-size="11" font-weight="700" fill="#C05C1A" text-anchor="middle">PAS $submit Endpoint</text>
+  <text x="706" y="691" font-size="10" fill="#333" text-anchor="middle">Da Vinci PAS transaction bundle</text>
+  <text x="706" y="705" font-size="10" fill="#333" text-anchor="middle">POST /fhir/Claim/$submit</text>
+  <text x="706" y="719" font-size="10" fill="#555" text-anchor="middle">Returns ClaimResponse (FHIR)</text>
+
+  <!-- arrows: PA-1 to CRD -->
+  <line x1="359" y1="550" x2="174" y2="658" stroke="#C05C1A" stroke-width="1.5" marker-end="url(#arrowOrange)"/>
+  <text x="244" y="600" font-size="9" fill="#C05C1A" text-anchor="middle">CDS Hooks POST</text>
+
+  <!-- arrows: PA-2 to DTR -->
+  <line x1="450" y1="352" x2="430" y2="658" stroke="#C05C1A" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrowOrange)"/>
+  <text x="490" y="510" font-size="9" fill="#C05C1A" text-anchor="middle">GET Questionnaire</text>
+  <text x="490" y="522" font-size="9" fill="#C05C1A" text-anchor="middle">(cache miss only)</text>
+
+  <!-- arrows: PA-5 to PAS submit -->
+  <line x1="600" y1="550" x2="706" y2="658" stroke="#C05C1A" stroke-width="2" marker-end="url(#arrowOrange)"/>
+  <text x="678" y="600" font-size="9" fill="#C05C1A" text-anchor="middle">POST PAS bundle</text>
+  <!-- response arrow back -->
+  <line x1="720" y1="658" x2="640" y2="560" stroke="#2D9E6B" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#arrowGreen)"/>
+  <text x="700" y="620" font-size="9" fill="#2D9E6B" text-anchor="middle">ClaimResponse</text>
+
+  <!-- ══════════════════════════════════════════════════
+       GCP SERVICES ROW
+  ══════════════════════════════════════════════════ -->
+  <text x="36" y="776" font-size="12" font-weight="700" fill="#7B5EA7">GCP Services</text>
+
+  <!-- Firestore -->
+  <rect x="36" y="788" width="196" height="90" rx="8" fill="#F3EEF9" stroke="#7B5EA7" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="36" y="788" width="196" height="24" rx="8" fill="#7B5EA7"/>
+  <rect x="36" y="800" width="196" height="12" fill="#7B5EA7"/>
+  <text x="134" y="806" font-size="11" font-weight="700" fill="white" text-anchor="middle">Firestore</text>
+  <text x="134" y="824" font-size="10" fill="#333" text-anchor="middle">pa_questionnaire_cache</text>
+  <text x="134" y="838" font-size="10" fill="#333" text-anchor="middle">Questionnaire cache (24h TTL)</text>
+  <text x="134" y="852" font-size="10" fill="#333" text-anchor="middle">pa_submission_status</text>
+  <text x="134" y="866" font-size="10" fill="#333" text-anchor="middle">Async polling state</text>
+
+  <!-- Secret Manager -->
+  <rect x="252" y="788" width="196" height="90" rx="8" fill="#F3EEF9" stroke="#7B5EA7" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="252" y="788" width="196" height="24" rx="8" fill="#7B5EA7"/>
+  <rect x="252" y="800" width="196" height="12" fill="#7B5EA7"/>
+  <text x="350" y="806" font-size="11" font-weight="700" fill="white" text-anchor="middle">Secret Manager</text>
+  <text x="350" y="824" font-size="10" fill="#333" text-anchor="middle">pa-payer-endpoints</text>
+  <text x="350" y="838" font-size="10" fill="#555" text-anchor="middle">(JSON: payer_id to CRD URL)</text>
+  <text x="350" y="852" font-size="10" fill="#333" text-anchor="middle">availity-client-id</text>
+  <text x="350" y="866" font-size="10" fill="#333" text-anchor="middle">availity-client-secret</text>
+
+  <!-- Cloud DLP -->
+  <rect x="468" y="788" width="196" height="90" rx="8" fill="#F3EEF9" stroke="#7B5EA7" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="468" y="788" width="196" height="24" rx="8" fill="#7B5EA7"/>
+  <rect x="468" y="800" width="196" height="12" fill="#7B5EA7"/>
+  <text x="566" y="806" font-size="11" font-weight="700" fill="white" text-anchor="middle">Cloud DLP</text>
+  <text x="566" y="824" font-size="10" fill="#333" text-anchor="middle">cdss-phi-doc-agents template</text>
+  <text x="566" y="838" font-size="10" fill="#555" text-anchor="middle">PHI inspection before</text>
+  <text x="566" y="852" font-size="10" fill="#555" text-anchor="middle">any external transmission</text>
+  <text x="566" y="866" font-size="10" fill="#333" text-anchor="middle">Runs in PA-4 (not PA-5)</text>
+
+  <!-- Pub/Sub out -->
+  <rect x="684" y="788" width="196" height="90" rx="8" fill="#F3EEF9" stroke="#7B5EA7" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="684" y="788" width="196" height="24" rx="8" fill="#7B5EA7"/>
+  <rect x="684" y="800" width="196" height="12" fill="#7B5EA7"/>
+  <text x="782" y="806" font-size="11" font-weight="700" fill="white" text-anchor="middle">Cloud Pub/Sub (outbound)</text>
+  <text x="782" y="824" font-size="10" fill="#333" text-anchor="middle">prior-auth-ready topic</text>
+  <text x="782" y="838" font-size="10" fill="#555" text-anchor="middle">Published on APPROVED</text>
+  <text x="782" y="852" font-size="10" fill="#555" text-anchor="middle">or DENIED decision</text>
+  <text x="782" y="866" font-size="10" fill="#333" text-anchor="middle">patient_id, auth_number, etc.</text>
+
+  <!-- Cloud Scheduler -->
+  <rect x="900" y="788" width="164" height="90" rx="8" fill="#F3EEF9" stroke="#7B5EA7" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="900" y="788" width="164" height="24" rx="8" fill="#7B5EA7"/>
+  <rect x="900" y="800" width="164" height="12" fill="#7B5EA7"/>
+  <text x="982" y="806" font-size="11" font-weight="700" fill="white" text-anchor="middle">Cloud Scheduler</text>
+  <text x="982" y="824" font-size="10" fill="#333" text-anchor="middle">poll_for_decision()</text>
+  <text x="982" y="838" font-size="10" fill="#555" text-anchor="middle">Every 15 min (default)</text>
+  <text x="982" y="852" font-size="10" fill="#555" text-anchor="middle">CMS-0057-F windows:</text>
+  <text x="982" y="866" font-size="10" fill="#333" text-anchor="middle">72h expedited / 168h standard</text>
+
+  <!-- arrows from PA steps to GCP services -->
+  <!-- PA-2 to Firestore -->
+  <line x1="400" y1="586" x2="134" y2="788" stroke="#7B5EA7" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#arrowGray)"/>
+  <!-- PA-4 to DLP -->
+  <line x1="524" y1="586" x2="566" y2="788" stroke="#7B5EA7" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+  <!-- PA-5 to Pub/Sub out -->
+  <line x1="700" y1="586" x2="782" y2="788" stroke="#7B5EA7" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+  <!-- PA-5 to Firestore (store submission state) -->
+  <line x1="430" y1="550" x2="134" y2="788" stroke="#888" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrowGray)"/>
+
+  <!-- ══════════════════════════════════════════════════
+       HUMAN REVIEW GATE
+  ══════════════════════════════════════════════════ -->
+  <rect x="896" y="620" width="168" height="140" rx="8" fill="#FFF9E6" stroke="#D4A017" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="896" y="620" width="168" height="28" rx="8" fill="#D4A017"/>
+  <rect x="896" y="636" width="168" height="12" fill="#D4A017"/>
+  <text x="980" y="639" font-size="11" font-weight="700" fill="white" text-anchor="middle">Human Review Gate</text>
+  <text x="980" y="662" font-size="10" fill="#7A5C00" text-anchor="middle">ClaimResponse written</text>
+  <text x="980" y="676" font-size="10" fill="#7A5C00" text-anchor="middle">with status=draft</text>
+  <text x="980" y="692" font-size="10" fill="#333" text-anchor="middle">Clinician must promote</text>
+  <text x="980" y="706" font-size="10" fill="#333" text-anchor="middle">to status=active before</text>
+  <text x="980" y="720" font-size="10" fill="#333" text-anchor="middle">any care action triggers</text>
+  <text x="980" y="736" font-size="10" fill="#7A5C00" font-weight="700" text-anchor="middle">Agent surfaces decisions</text>
+  <text x="980" y="750" font-size="10" fill="#7A5C00" font-weight="700" text-anchor="middle">-- never acts on them</text>
+
+  <!-- arrow from FHIR to Human Review Gate -->
+  <line x1="980" y1="574" x2="980" y2="620" stroke="#D4A017" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrowGray)"/>
+
+  <!-- ══════════════════════════════════════════════════
+       TASK RESOURCE BOX (error paths)
+  ══════════════════════════════════════════════════ -->
+  <rect x="36" y="900" width="440" height="120" rx="8" fill="#FEF0E7" stroke="#C05C1A" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="36" y="900" width="440" height="26" rx="8" fill="#E07030"/>
+  <rect x="36" y="914" width="440" height="12" fill="#E07030"/>
+  <text x="256" y="919" font-size="11" font-weight="700" fill="white" text-anchor="middle">FHIR Task Resources (Human Escalation)</text>
+  <text x="52" y="942" font-size="10" fill="#333">Missing required answers   --   clinician completes documentation and reruns agent</text>
+  <text x="52" y="958" font-size="10" fill="#333">PA denied   --   clinician review for appeal, Task contains denial reason</text>
+  <text x="52" y="974" font-size="10" fill="#333">PA pended   --   care team provides payer-requested items, Task lists each item</text>
+  <text x="52" y="990" font-size="10" fill="#333">DLP block (urgent)   --   staff review bundle for unexpected PHI before resubmit</text>
+  <text x="52" y="1006" font-size="10" fill="#333">CMS window exceeded (urgent)   --   escalate to payer relations</text>
+
+  <!-- arrow from agent early exits to Task box -->
+  <line x1="260" y1="740" x2="256" y2="900" stroke="#C05C1A" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#arrowOrange)"/>
+
+  <!-- ══════════════════════════════════════════════════
+       DOWNSTREAM CONSUMERS
+  ══════════════════════════════════════════════════ -->
+  <rect x="504" y="900" width="560" height="120" rx="8" fill="#E8F7EF" stroke="#2D9E6B" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="504" y="900" width="560" height="26" rx="8" fill="#2D9E6B"/>
+  <rect x="504" y="914" width="560" height="12" fill="#2D9E6B"/>
+  <text x="784" y="919" font-size="11" font-weight="700" fill="white" text-anchor="middle">Downstream Consumers (via prior-auth-ready Pub/Sub)</text>
+  <text x="520" y="942" font-size="10" fill="#333">Scheduling system   --   schedules CGM device provisioning on APPROVED decision</text>
+  <text x="520" y="958" font-size="10" fill="#333">EHR integration   --   surfaces auth number in Epic ordering workflow</text>
+  <text x="520" y="974" font-size="10" fill="#333">Care coordination   --   notifies care manager of denial for appeal initiation</text>
+  <text x="520" y="990" font-size="10" fill="#333">CDI Agent (Agent 5)   --   reviews documentation gaps that may have contributed to denial</text>
+  <text x="520" y="1006" font-size="10" fill="#333">Patient notification   --   triggers patient communication for approved PA</text>
+
+  <!-- arrow from Pub/Sub to Downstream -->
+  <line x1="782" y1="878" x2="784" y2="900" stroke="#2D9E6B" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+
+  <!-- ══════════════════════════════════════════════════
+       DATA MODELS ROW
+  ══════════════════════════════════════════════════ -->
+  <rect x="36" y="1044" width="1028" height="110" rx="8" fill="#EEF4FA" stroke="#2E75B6" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="36" y="1044" width="1028" height="26" rx="8" fill="#2E75B6"/>
+  <rect x="36" y="1058" width="1028" height="12" fill="#2E75B6"/>
+  <text x="550" y="1063" font-size="12" font-weight="700" fill="white" text-anchor="middle">Core Pydantic Data Models  (shared/models.py)</text>
+
+  <!-- Five model boxes -->
+  <rect x="52" y="1080" width="176" height="62" rx="5" fill="white" stroke="#2E75B6" stroke-width="1"/>
+  <text x="140" y="1096" font-size="10" font-weight="700" fill="#1F5C99" text-anchor="middle">QuestionnaireAnswer</text>
+  <text x="140" y="1109" font-size="9" fill="#333" text-anchor="middle">link_id, answer_value</text>
+  <text x="140" y="1121" font-size="9" fill="#333" text-anchor="middle">evidence_resource_id (required)</text>
+  <text x="140" y="1133" font-size="9" fill="#C05C1A" text-anchor="middle">Citation validator on construct</text>
+
+  <rect x="244" y="1080" width="176" height="62" rx="5" fill="white" stroke="#2E75B6" stroke-width="1"/>
+  <text x="332" y="1096" font-size="10" font-weight="700" fill="#1F5C99" text-anchor="middle">ClaimResponseDecision</text>
+  <text x="332" y="1109" font-size="9" fill="#333" text-anchor="middle">decision (ClaimDecision enum)</text>
+  <text x="332" y="1121" font-size="9" fill="#333" text-anchor="middle">auth_number, denial_reason</text>
+  <text x="332" y="1133" font-size="9" fill="#333" text-anchor="middle">pended_items, raw_claim_response</text>
+
+  <rect x="436" y="1080" width="176" height="62" rx="5" fill="white" stroke="#2E75B6" stroke-width="1"/>
+  <text x="524" y="1096" font-size="10" font-weight="700" fill="#1F5C99" text-anchor="middle">PAAgentResult</text>
+  <text x="524" y="1109" font-size="9" fill="#333" text-anchor="middle">Top-level audit record</text>
+  <text x="524" y="1121" font-size="9" fill="#333" text-anchor="middle">All step outcomes, timing</text>
+  <text x="524" y="1133" font-size="9" fill="#333" text-anchor="middle">Written to Firestore on complete</text>
+
+  <rect x="628" y="1080" width="176" height="62" rx="5" fill="white" stroke="#2E75B6" stroke-width="1"/>
+  <text x="716" y="1096" font-size="10" font-weight="700" fill="#1F5C99" text-anchor="middle">CoverageCheckResult</text>
+  <text x="716" y="1109" font-size="9" fill="#333" text-anchor="middle">PA status, payer_id</text>
+  <text x="716" y="1121" font-size="9" fill="#333" text-anchor="middle">coverage_fhir_id</text>
+  <text x="716" y="1133" font-size="9" fill="#333" text-anchor="middle">used_fallback flag</text>
+
+  <rect x="820" y="1080" width="228" height="62" rx="5" fill="white" stroke="#2E75B6" stroke-width="1"/>
+  <text x="934" y="1096" font-size="10" font-weight="700" fill="#1F5C99" text-anchor="middle">CDSSConfig (singleton)</text>
+  <text x="934" y="1109" font-size="9" fill="#333" text-anchor="middle">lru_cache(maxsize=1) singleton</text>
+  <text x="934" y="1121" font-size="9" fill="#333" text-anchor="middle">Loaded from env at startup</text>
+  <text x="934" y="1133" font-size="9" fill="#333" text-anchor="middle">payer_endpoints from Secret Mgr</text>
+
+  <!-- ══════════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════════ -->
+  <rect x="0" y="1280" width="1100" height="40" fill="#1F5C99"/>
+  <text x="36" y="1306" font-size="11" fill="#B3D4F0">ADK Prior Authorization Agent  |  Portfolio Project 2 of 9  |  Healthcare Agentic AI Series</text>
+  <text x="1064" y="1306" font-size="11" fill="#B3D4F0" text-anchor="end">gregory.horne@gbhorne.com</text>
+
+</svg>
